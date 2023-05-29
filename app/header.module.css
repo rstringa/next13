@@ -1,0 +1,15 @@
+.menu ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+.menu li {
+    padding: 10px;
+}
+.search_div {
+    text-align: center;
+}

@@ -1,0 +1,11 @@
+.navbar {
+    max-width: 980px;
+    margin: 10px auto;
+    text-align: center; 
+}
+.main {
+
+    display: grid;
+    place-content: center;
+    background-color: #333;
+}
