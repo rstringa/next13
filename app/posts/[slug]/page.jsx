@@ -1,7 +1,12 @@
 export default async function Post({params}) {
 
       const postSlug = params.slug
-      const res = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/posts/?slug=${postSlug}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/posts/?slug=${postSlug}`,
+      {
+        next: {
+          revalidate:60
+        }
+      });
       const data = await res.json();
       
       function renderPage(post) {
