@@ -1,42 +1,60 @@
 "use client"
 import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
 
-async function getCategories() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/categories`
-    );
+export default function CategoriesNav({ onCategoryChange }) {
+  const [navCategories, setNavCategories] = useState([]);
+  const activeLinkRef = useRef(null);
 
-    return res.json();
+  async function getCategoriesNav() {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/categories`);
+      const data = await res.json();
+      setNavCategories(data)
   }
 
-export default async function CategoriesNav({ onChangeCategory }) {
+  useEffect(() => {
+    getCategoriesNav()
+  }, [])
 
-    const categories = await getCategories()
-    const handleChangeCategory = (e, categoryId) => {
-        e.preventDefault();
-        onChangeCategory(categoryId);
-      };
+  const handleCategoryChange = (e, categoryId) => {
+    e.preventDefault();
 
-    return (
+    // Agregar la clase "activo" al Link actual
+    e.currentTarget.classList.add('activo');
+
+    // Quitar la clase "activo" de los demás Links
+    if (activeLinkRef.current && activeLinkRef.current !== e.currentTarget) {
+      activeLinkRef.current.classList.remove('activo');
+    }
+
+    // Actualizar la referencia al Link activo
+    activeLinkRef.current = e.currentTarget;
+
+    // Actualiza categoryId en page.jsx
+    onCategoryChange(categoryId);
+  };
+
+
+  return (
     <>
-    <ul>
-    <li>
-          <Link href="#" onClick={(e) => handleChangeCategory(e, "")}>
+      <ul>
+        <li>
+          <Link href="#" onClick={(e) => handleCategoryChange(e, "")}>
             Todas
           </Link>
         </li>
-    {
-        categories.map(category=>(
+        {
+          navCategories.map(category => (
             <li key={category.id}>
-                <Link
-                     
-                     href="#"
-                     onClick={ (e) => handleChangeCategory(e, category.id) }
-                >              
+              <Link
+                href="#"
+                onClick={(e) => handleCategoryChange(e, category.id)}
+              >
                 {category.name}</Link>
             </li>
-        ))
-    }
-    </ul>
+          ))
+        }
+      </ul>
     </>
   )
 }
