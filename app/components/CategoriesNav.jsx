@@ -7,7 +7,12 @@ export default function CategoriesNav({ onCategoryChange }) {
   const activeLinkRef = useRef(null);
 
   async function getCategoriesNav() {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/categories`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/categories`,
+      {
+        next: {
+          revalidate:60
+        }
+      });
       const data = await res.json();
       setNavCategories(data)
   }

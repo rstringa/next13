@@ -14,26 +14,39 @@ export default function Page() {
 
   function getFirstPosts() {
 
-    fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/posts`)
+    fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/posts`, 
+    {
+      next: {
+        revalidate:60
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
       });
   }
 
-
- 
  function getCategoriesPosts() {
     if (categoryId === "") {
 
-      fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/posts`)
+      fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/posts`, 
+      {
+        next: {
+          revalidate:60
+        }
+      })
         .then((res) => res.json())
         .then((data) => {
           setPosts(data);
         });
     } else {
 
-      fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/posts?categories=${categoryId}`)
+      fetch(`${process.env.NEXT_PUBLIC_APIURL}/wp/v2/posts?categories=${categoryId}`,
+      {
+        next: {
+          revalidate:60
+        }
+      })
         .then((res) => res.json())
         .then((data) => {
           setPosts(data);
