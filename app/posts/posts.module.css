@@ -1,6 +1,21 @@
-.card {
-    border: 1px solid #ccc;
+.nav_categories {
+    border-bottom:1px solid #ededed; 
+    background: #eee;
 }
-.card a {
-    text-decoration: none;
+.nav_categories ul {
+    list-style: none;
+    border-bottom:1px solid  #ededed;
+    display: flex;
+    justify-content: center;
+    column-gap: 0px;
+    margin-bottom: 0;
+}
+.nav_categories li {
+    padding: 20px 15px;
+}
+.nav_categories a {
+    color:var(--text-color);
+}
+.nav_categories li:hover a {
+    color:var(--primary-color);
 }

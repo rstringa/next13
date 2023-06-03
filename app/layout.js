@@ -1,21 +1,33 @@
-import '../public/css/bootstrap.min.css'
+"use client"
+import { useEffect } from 'react'
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import Header from './Header'
+import 'bootstrap/dist/css/bootstrap.css'
 
 
-const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({ 
+  weight: ['300','400','700'],
+  subsets: ['latin'],
+  display: 'swap',
+ })
 
 export const metadata = {
   description: 'React & Next-13 Theme 1'
 }
 
 export default function RootLayout({children}){
+  
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.js')
+  }, [])
+
   return (
     <html lang="en">
-      <body className={`${inter.className} clase-extra`}>
+     
+      <body className={`${roboto.className} clase-extra`}>
         <Header />
-        <main className="main">  
+        <main className="container">  
           {children}
         </main>
       </body>
