@@ -27,7 +27,7 @@ export default function RootLayout({children}){
      
       <body className={`${roboto.className} clase-extra`}>
         <Header />
-        <main className="container">  
+        <main className="main">  
           {children}
         </main>
       </body>

@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect, useContext } from "react";
-import styles from './posts.module.css';
+
 import Vermas from './Vermas';
 import { PostContext } from "../context/PostProvider";
 import CategoriesNav from '../components/CategoriesNav'
@@ -64,12 +64,12 @@ export default function Page() {
   return (
     <>
       <CategoriesNav/>
-
+    <div className="container">
       <div className="row">
            
       {posts.map(post => (
-        <div className="col-lg-4"> 
-        <div className="card" key={post.id}>
+        <div className="col-lg-4" key={post.id}> 
+        <div className="card" >
           { post.featured_image_url.featured_media !== 0 &&
             <img src={post.featured_image_url.featured_image_url} className="card-img-top" alt={post.featured_image_url.title.rendered} />
           }
@@ -87,6 +87,7 @@ export default function Page() {
         </div>
       ))}
       
+      </div>
       </div>
     </>
   );

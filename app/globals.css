@@ -3,20 +3,7 @@
   --primary-color:#5143d9;
   --primary-color-light:rgba(81, 67, 217, 0.1);
 }
-.main {
-  max-width:1120px;
-  margin: auto;
-}
-.full_width {
-  width: 100vw;
-  transform: translateX(calc((100vw - 1340px)*-1));
-}
+
 a {
   text-decoration: none!important;
-}
-div[class*="nav_categories"] li.active {
-  border-bottom: 2px solid var(--primary-color);
-}
-div[class*="nav_categories"] li.active a {
-  color:var(--primary-color)
 }
