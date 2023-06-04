@@ -2,11 +2,12 @@
 import Link from "next/link";
 import { useState, useEffect, useRef, useContext } from "react";
 import { PostContext } from "../context/PostProvider";
-
+import CategoriesSkeleton from './CategoriesSkeleton';
 
 export default function CategoriesNav() {
   const [navCategories, setNavCategories] = useState([""]);
   const [categoryId, setCategoryId] = useContext(PostContext);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const activeLinkRef = useRef(null); 
   const navLinksUl = useRef();
@@ -19,6 +20,7 @@ export default function CategoriesNav() {
         }
       });
       const data = await res.json();
+      setDataLoaded(true)
       setNavCategories(data)
   }
 
@@ -50,27 +52,42 @@ export default function CategoriesNav() {
   return (
     <>
     <div className="nav_categories mb-5">
-      <ul ref={navLinksUl}>
-        <li key="li-0" className="active">
-          <Link href="#" onClick={(e) => handleCategoryChange(e, "")}>
-            Todas
-          </Link>
-        </li>
-        {
-          navCategories.map(category => (
-            <li 
-            key={`li-${category.id}`}
-            >
-              <Link
-                
-                href="#"
-                onClick={(e) => handleCategoryChange(e, category.id)}
+      { dataLoaded ? (
+        
+        <ul ref={navLinksUl}>
+          <li key="li-0" className="active">
+            <Link href="#" onClick={(e) => handleCategoryChange(e, "")}>
+              Todas
+            </Link>
+          </li>
+          {
+            navCategories.map(category => (
+              <li 
+              key={`li-${category.id}`}
               >
-                {category.name}</Link>
-            </li>
-          ))
-        }
-      </ul>
+                
+                <Link
+                  
+                  href="#"
+                  onClick={(e) => handleCategoryChange(e, category.id)}
+                >
+                  {category.name}</Link>
+
+              </li>
+            ))
+          }
+        </ul>
+      ) :
+      (
+        <ul>
+          <li key="no-categories">
+            <CategoriesSkeleton />
+          </li>
+        </ul>
+        
+      )
+      }
+      
       </div>
     </>
   )
