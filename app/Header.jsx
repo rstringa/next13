@@ -3,14 +3,23 @@ import styles from './header.module.css';
 import Link from 'next/link';
 import SearchBar from './components/SearchBar'
 import { usePathname } from 'next/navigation';
+import UserStatus from './components/UserStatus';
 
 export default function Header() {
   const pathname = usePathname();
-  
+  const user = UserStatus();
+
   return (
 
     <div className={styles.header}>
         <div className="container">
+          <div className="user">
+          {user ? (
+        <p>Bienvenido, {user.name}</p>
+      ) : (
+        <p>Inicia sesión para ver tu nombre</p>
+      )}
+          </div>
             <ul> 
               <li key="1"><Link 
               className={pathname === '/' ? styles.active : ""}
