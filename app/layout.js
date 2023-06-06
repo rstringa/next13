@@ -12,9 +12,9 @@ const roboto = Roboto({
   display: 'swap',
  })
 
-export const metadata = {
-  description: 'React & Next-13 Theme 1'
-}
+// export const metadata = {
+//   description: 'React & Next-13 Theme 1'
+// }
 
 export default function RootLayout({children}){
   
