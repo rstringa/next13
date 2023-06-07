@@ -1,3 +1,5 @@
+import {Comments} from '../../components/Comments';
+
 export default async function Post({params}) {
 
       const postSlug = params.slug
@@ -8,19 +10,25 @@ export default async function Post({params}) {
         }
       });
       const data = await res.json();
-      
+     
+
       function renderPage(post) {
         return (
-          <div>
+          <div className='container pt-5 pb-5'>
              <h1>{post.title.rendered}</h1>
              <div dangerouslySetInnerHTML={{ __html: post.content.rendered }}></div>
+             <Comments 
+                postId = {post.id }
+              />
           </div>
+         
         );
       }
 
   return (
     <>
     {data.map(post => renderPage(post))}
+    
     </>
    
   )
