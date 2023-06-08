@@ -1,3 +1,5 @@
+import './home.css';
+
 export const metadata = {
   title: `Home`,
   // twitter: {

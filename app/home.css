@@ -1,0 +1,12 @@
+.wp-block-latest-posts__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    list-style: none;
+    padding: 0px;
+
+}
+.wp-block-latest-posts__list li{
+    background: #ededed;
+    padding: 20px;
+}
